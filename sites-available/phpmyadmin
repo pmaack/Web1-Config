@@ -1,0 +1,14 @@
+server {
+        listen 8080;
+        index index.php;
+ 
+        root /srv/www/phpMyAdmin;
+        server_name phpmyadmin.server.local;
+ 
+        location ~ \.php$ {
+                fastcgi_pass unix:/var/run/php-fpm/fpm.sock;
+                fastcgi_index index.php;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                include fastcgi_params;
+        }
+}
