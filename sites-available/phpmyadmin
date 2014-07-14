@@ -1,8 +1,8 @@
 server {
         listen 80; 
 
-        root /srv/www/phpMyAdmin;
-        server_name phpmyadmin.yourresearchportal.com;
+        root /usr/share/phpMyAdmin;
+        server_name pma;
  
 	access_log /var/log/nginx/phpmyadmin/access.log;
 	error_log /var/log/nginx/phpmyadmin/error.log;
