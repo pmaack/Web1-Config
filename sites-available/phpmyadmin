@@ -1,10 +1,30 @@
 server {
-        listen 8080;
-        index index.php;
- 
+        listen 80; 
+
         root /srv/www/phpMyAdmin;
-        server_name phpmyadmin.server.local;
+        server_name phpmyadmin.yourresearchportal.com;
  
+	access_log /var/log/nginx/phpmyadmin/access.log;
+	error_log /var/log/nginx/phpmyadmin/error.log;
+
+	location / {
+		index index.php;
+	}
+
+	location ~* ^.+.(jpg|jpeg|gif|css|png|js|ico|xml)$ {
+		access_log off;
+		expires 360d;
+	}
+
+	location ~ /\.ht {
+		deny all;
+	}
+
+	location ~ /(libraries|setup/frames|setup/libs) {
+		deny all;
+		return 404;
+	}
+
         location ~ \.php$ {
                 fastcgi_pass unix:/var/run/php-fpm/fpm.sock;
                 fastcgi_index index.php;
